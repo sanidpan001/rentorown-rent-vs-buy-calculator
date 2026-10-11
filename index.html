@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentOrOwn — Rent vs Buy Calculator: Should You Rent or Buy a Home?</title>
+<meta name="description" content="Free rent vs buy calculator. Compare years of renting against buying the same home — EMI, equity, appreciation, opportunity cost and your break-even year.">
+<link rel="canonical" href="https://rentorown.fixoraa.tech/">
+<meta property="og:title" content="RentOrOwn — Rent vs Buy Calculator: Should You Rent or Buy a Home?">
+<meta property="og:description" content="Free rent vs buy calculator. Compare years of renting against buying the same home — EMI, equity, appreciation, opportunity cost and your break-even year.">
+<meta property="og:url" content="https://rentorown.fixoraa.tech/">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--pri:#0F766E;--acc:#F59E0B;--bgc:#F0FDF9}
+body{background:var(--bgc);font-family:'Segoe UI',system-ui,sans-serif}
+.pri{background:var(--pri)} .prit{color:var(--pri)} .acct{color:var(--acc)}
+.btn{background:var(--pri);color:#fff;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+.btn:hover{opacity:.9} .btn2{background:var(--acc);color:#111;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+input,select,textarea{border:1.5px solid #cbd5e1;border-radius:.55rem;padding:.55rem .7rem;width:100%;background:#fff;color:#0f172a}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-color:transparent}
+label{font-size:.83rem;font-weight:600;display:block;margin-bottom:.3rem}
+.card{background:#fff;border-radius:1rem;box-shadow:0 8px 30px rgba(15,23,42,.08);padding:1.4rem}
+article p{margin:.7rem 0;line-height:1.75;color:#334155}
+article h2{font-size:1.45rem;font-weight:800;margin:1.6rem 0 .4rem;color:#0f172a}
+.faq{background:#fff;border-radius:.7rem;padding:.9rem 1.1rem;margin:.55rem 0;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+.faq summary{font-weight:700;cursor:pointer}
+table.dt{width:100%;border-collapse:collapse} table.dt th,table.dt td{border:1px solid #e2e8f0;padding:.45rem .6rem;text-align:left;font-size:.9rem}
+table.dt th{background:#f1f5f9}
+
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "RentOrOwn", "url": "https://rentorown.fixoraa.tech/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Free rent vs buy calculator. Compare years of renting against buying the same home \u2014 EMI, equity, appreciation, opportunity cost and your break-even year."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the break-even year in rent vs buy?", "acceptedAnswer": {"@type": "Answer", "text": "It is the year from which buying becomes cheaper than renting in total net cost, counting equity, appreciation and the renter's invested down payment. Staying beyond the break-even year favours buying; leaving earlier usually favours renting."}}, {"@type": "Question", "name": "Does this calculator include the opportunity cost of the down payment?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The renting path invests the down payment and the monthly cost difference at the return you enter, and that growth is subtracted from the renter's net cost. Ignoring it is the most common error in rent-versus-buy comparisons."}}, {"@type": "Question", "name": "What appreciation rate should I assume for a home?", "acceptedAnswer": {"@type": "Answer", "text": "Use a cautious long-term figure for your city \u2014 many planners use 5 to 7 percent for Indian metros over long periods, but individual localities vary widely. Test a lower figure too; a purchase that only works at heroic appreciation is risky."}}, {"@type": "Question", "name": "Is EMI itself a cost like rent?", "acceptedAnswer": {"@type": "Answer", "text": "Only partly. The interest portion of an EMI is a cost; the principal portion converts cash into home equity you own. That is why this tool tracks net cost and equity rather than simply comparing EMI with monthly rent."}}, {"@type": "Question", "name": "How long should I plan to stay for buying to make sense?", "acceptedAnswer": {"@type": "Answer", "text": "As a rough guide, stays under five years rarely favour buying once interest front-loading and transaction costs are counted. The exact answer is your break-even year \u2014 compare it honestly with your realistic plans."}}, {"@type": "Question", "name": "Should I count stamp duty and registration?", "acceptedAnswer": {"@type": "Answer", "text": "Ideally yes \u2014 add them to the effective price or treat them as a reason to demand a longer horizon. They typically run 5 to 7 percent of the price in many states and are never recovered if you sell quickly."}}]}</script>
+</head>
+<body id="top">
+<header class="sticky top-0 z-40 shadow-md" style="background:#134E4A">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="text-xl font-extrabold tracking-tight" style="color:#ECFDF5">🏠 RentOrOwn</a>
+    <nav class="flex gap-5 text-sm font-semibold" style="color:#ECFDF5">
+      <a href="#top" class="hover:underline">Home</a>
+      <a href="https://fixoraa.tech" class="hover:underline">More Tools</a>
+    </nav>
+  </div>
+</header>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+  <div class="text-center mb-6">
+    <h1 class="text-3xl sm:text-4xl font-extrabold" style="color:#0f172a">Rent vs Buy Calculator</h1>
+    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Should you keep renting or buy the home? Enter the price, your rent and a few assumptions — RentOrOwn compares the true net cost of both paths, year by year, including the opportunity cost of your down payment.</p>
+    <span class="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold text-white pri">✓ Unlimited Free Usage — No Signup, No Watermark</span>
+  </div>
+  <div class="grid md:grid-cols-5 gap-6">
+  <div class="card md:col-span-2 space-y-3">
+    <div><label>Home price</label><input id="price" type="number" value="5000000"></div>
+    <div><label>Down payment (%)</label><input id="down" type="number" value="20"></div>
+    <div><label>Loan interest rate (% / year)</label><input id="rate" type="number" step="0.1" value="8.5"></div>
+    <div><label>Compare over (years)</label><input id="years" type="number" value="10"></div>
+    <div><label>Current monthly rent for a similar home</label><input id="rent" type="number" value="22000"></div>
+    <div><label>Rent increase (% / year)</label><input id="hike" type="number" step="0.5" value="5"></div>
+    <div><label>Home appreciation (% / year)</label><input id="appr" type="number" step="0.5" value="6"></div>
+    <div><label>Return if you invest instead (% / year)</label><input id="inv" type="number" step="0.5" value="10"></div>
+    <div><label>Maintenance + society (% of price / year)</label><input id="maint" type="number" step="0.1" value="1"></div>
+    <button class="btn w-full" onclick="calc()">Compare Rent vs Buy</button>
+    <button class="btn2 w-full" onclick="window.print()">🖨 Print comparison</button>
+  </div>
+  <div class="card md:col-span-3">
+    <div id="verdict" class="text-lg font-bold prit">Press Compare to see which path wins — and in which year buying overtakes renting.</div>
+    <div class="grid grid-cols-3 gap-3 my-4 text-center">
+      <div class="p-3 rounded-lg bg-teal-50"><div class="text-xs font-bold">MONTHLY EMI</div><div id="oEmi" class="text-xl font-extrabold">–</div></div>
+      <div class="p-3 rounded-lg bg-amber-50"><div class="text-xs font-bold">DOWN PAYMENT</div><div id="oDown" class="text-xl font-extrabold">–</div></div>
+      <div class="p-3 rounded-lg bg-teal-50"><div class="text-xs font-bold">BREAK-EVEN YEAR</div><div id="oBe" class="text-xl font-extrabold">–</div></div>
+    </div>
+    <div id="chart" class="space-y-1"></div>
+    <div class="overflow-x-auto mt-4"><table class="dt" id="tbl"></table></div>
+  </div></div>
+</main>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+<section class="mx-auto max-w-4xl px-4 sm:px-6 pb-6">
+  <article>
+  <h2>Renting vs buying: why the sticker price lies</h2>
+<p>The rent-versus-buy question looks simple — compare the monthly rent with the monthly EMI and pick the smaller number. That shortcut misleads almost everyone, because an EMI is not a cost in the same way rent is. Part of every EMI repays your loan and builds equity you own; only the interest portion is a true cost. Rent, on the other hand, is entirely a cost — but the renter keeps the down payment free to invest, and that invested money can grow surprisingly fast. A fair comparison has to count all of it: interest, maintenance, property taxes and insurance on the buying side; rent hikes and investment returns on the renting side; and the home's appreciation and remaining loan balance when you finally sell or stop counting.</p>
+<p>RentOrOwn exists to make that full comparison effortless. Instead of a single misleading monthly number, it tracks both households year by year — one that bought, one that kept renting and invested the difference — and reports the net cost of each path. The break-even year it finds is the moment buying pulls ahead for good. If your break-even year is far beyond how long you realistically plan to stay, renting is usually the financially stronger choice. If it arrives quickly, buying starts to look compelling even before emotional benefits enter the picture.</p>
+<h2>How the rent vs buy calculation works</h2>
+<p>For the buyer, the calculator starts with the home price and your down payment to find the loan amount, then computes the EMI with the standard amortisation formula. On top of the EMI it adds a monthly maintenance allowance — society charges, repairs and upkeep — plus a modest allowance for property tax and insurance, because owners pay all of these while renters do not. Every year, the buyer's total outlay grows, but so does the value of the home at your chosen appreciation rate, and the outstanding loan shrinks as principal is repaid. The buyer's net cost in any year is everything paid out minus the equity that would be recovered on a sale.</p>
+<p>For the renter, the calculator grows the rent each year by your expected rent increase, which is the detail most quick comparisons forget. The renter also invests: the down payment that was never spent, plus the monthly gap between what the buyer pays and what the renter pays, both compounding at your assumed investment return. The renter's net cost is total rent paid minus the growth of those investments. Neither side is flattered — both sets of assumptions are yours to change, and honest inputs produce an honest answer.</p>
+<h2>How to use this calculator well</h2>
+<p>Start with a real home you could actually buy and the real rent of a comparable home in the same neighbourhood — comparing a luxury purchase against a modest rental rigs the result. Enter the actual loan rate your bank quotes, not a teaser rate, and set the comparison period to how long you genuinely expect to live there. Job transfers, family changes and city moves matter more than any percentage: a five-year stay and a fifteen-year stay produce completely different verdicts on the same property.</p>
+<p>Then stress-test the answer. Lower the appreciation to a cautious figure — homes do not always rise smoothly — and raise the rent increase to what your city has actually seen. Try an investment return you could plausibly earn after tax, not a best-case market fantasy. If buying still wins under grumpy assumptions, the case is strong. If the verdict flips with every small change, treat the decision as a lifestyle choice rather than a financial one, and choose the life you prefer.</p>
+<h2>A worked example</h2>
+<p>Take a home priced at ₹50 lakh with a 20 percent down payment, a loan at 8.5 percent, and a similar rental at ₹22,000 a month rising 5 percent a year. The EMI lands near ₹31,000, which looks far worse than the rent — the classic sticker shock. Yet by year ten the buyer has built substantial equity while the home, appreciating at 6 percent, is worth close to ₹89 lakh. The renter, meanwhile, has paid roughly ₹33 lakh in rent but has also grown the ₹10 lakh down payment and the monthly difference into a meaningful portfolio. Which net cost ends lower depends almost entirely on the appreciation and investment-return assumptions — exactly why a year-by-year table beats a gut feeling.</p>
+<p>Notice what the example teaches: in the early years renting almost always leads, because the buyer's interest bill is front-loaded and the down payment is sunk. Buying's advantage is back-loaded — equity and appreciation compound quietly. Short stays punish buyers twice, once through interest and once through transaction costs. Long stays reward them the same way. The break-even year is where those two curves cross, and it is the single most useful number on this page.</p>
+<h2>Costs people forget on both sides</h2>
+<p>Buyers forget stamp duty and registration, which can add 5 to 7 percent in many Indian states, broker fees, furnishing, and the slow drip of repairs that landlords absorb for tenants. They also forget that a home is illiquid: selling takes months, and a forced sale in a weak market can erase years of equity gains. None of this makes buying bad — it makes buying a long-horizon commitment that should be entered with open eyes and a genuine intention to stay.</p>
+<p>Renters forget different things. Rent hikes compound just like interest does, and a 5 percent annual rise doubles rent in about fourteen years. Renters also face renewal uncertainty, society restrictions and the discipline problem: the invest-the-difference strategy only works if the difference is actually invested, automatically, every month. A renter who spends the gap instead of investing it gets the worst of both worlds. Whichever path you choose, automating the money habit matters more than winning the spreadsheet argument.</p>
+<h2>When renting is genuinely the smarter move</h2>
+<p>Renting wins more often than property culture admits. If your career may move you within five years, if the price-to-rent ratio in your city is extreme — the home costs more than 25 to 30 years of rent — or if buying would consume your entire emergency fund and leave you one job loss away from distress, renting with disciplined investing is not settling for less. It is the mathematically defensible choice, and it preserves the freedom to move for a better job, which for many young professionals is worth more than any property appreciation.</p>
+<p>Buying wins when the horizon is long, the EMI is comfortably below 40 percent of take-home pay, the location is one you would happily inhabit for a decade, and the emotional value of your own walls genuinely matters to your family. Run the numbers here first, then let the lifestyle argument speak. A home bought for sound reasons at a sustainable price is a fine asset. A home bought from fear of missing out, at the edge of affordability, is a liability wearing a housewarming party as a disguise.</p>
+<h2>Renting vs buying around the world — and in India</h2>
+<p>The balance shifts with local numbers. In cities where homes cost 15–20 times annual rent, buying often wins within a decade; where prices run 30 times rent — true of prime districts in many global metros — renting plus investing can lead for twenty years or more. Indian buyers should also weigh the tax treatment they actually receive: principal and interest deductions have caps and regime conditions that change the effective loan cost, and under-construction purchases carry GST and delay risk that ready homes do not. None of these factors appear in a simple EMI-versus-rent comparison, which is why this calculator exposes its assumptions instead of hiding them: appreciation, rent growth, investment return and maintenance are all yours to set, and the honest answer is the one that survives pessimistic settings.</p>
+<p>One more local reality: renting in India often means an 11-month agreement rhythm, periodic moves and society frictions that carry real, if unpriced, costs — while buying carries the equally real cost of concentration, with most of a family's wealth in one illiquid asset on one street. Money is only one axis of the decision; stability, schools, parents, and the freedom to chase a career across cities are others. Use the numbers here to learn what the financial axis says, price the lifestyle axis honestly, and only then decide — in that order, because reversing it is how households talk themselves into the spreadsheet they wanted all along.</p>
+  <h2>Frequently Asked Questions</h2>
+  <details class="faq"><summary>What is the break-even year in rent vs buy?</summary><p>It is the year from which buying becomes cheaper than renting in total net cost, counting equity, appreciation and the renter's invested down payment. Staying beyond the break-even year favours buying; leaving earlier usually favours renting.</p></details>
+<details class="faq"><summary>Does this calculator include the opportunity cost of the down payment?</summary><p>Yes. The renting path invests the down payment and the monthly cost difference at the return you enter, and that growth is subtracted from the renter's net cost. Ignoring it is the most common error in rent-versus-buy comparisons.</p></details>
+<details class="faq"><summary>What appreciation rate should I assume for a home?</summary><p>Use a cautious long-term figure for your city — many planners use 5 to 7 percent for Indian metros over long periods, but individual localities vary widely. Test a lower figure too; a purchase that only works at heroic appreciation is risky.</p></details>
+<details class="faq"><summary>Is EMI itself a cost like rent?</summary><p>Only partly. The interest portion of an EMI is a cost; the principal portion converts cash into home equity you own. That is why this tool tracks net cost and equity rather than simply comparing EMI with monthly rent.</p></details>
+<details class="faq"><summary>How long should I plan to stay for buying to make sense?</summary><p>As a rough guide, stays under five years rarely favour buying once interest front-loading and transaction costs are counted. The exact answer is your break-even year — compare it honestly with your realistic plans.</p></details>
+<details class="faq"><summary>Should I count stamp duty and registration?</summary><p>Ideally yes — add them to the effective price or treat them as a reason to demand a longer horizon. They typically run 5 to 7 percent of the price in many states and are never recovered if you sell quickly.</p></details>
+  </article>
+</section>
+<footer class="mt-6 py-8" style="background:#134E4A;color:#ECFDF5">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 text-center text-sm">
+    <p class="font-bold text-base">RentOrOwn</p>
+    <p class="opacity-80 mt-1">Free rent vs buy calculator. Compare years of renting against buying the same home — EMI, equity, appreciation, opportunity cost and your break-even year.</p>
+    <p class="mt-2"><a href="#top" class="underline">Home</a> · <a href="https://fixoraa.tech" class="underline">More Tools</a></p>
+    <p class="fx-credit" style="text-align:center;font-size:12.5px;opacity:.62;margin:10px auto 2px;letter-spacing:.01em">Made by <a href="https://fixoraa.tech" target="_blank" rel="noopener" style="color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px">Fixoraa</a></p>
+  </div>
+</footer>
+<script id="lib-rentorown">
+
+function emiMonthly(principal, annualRatePct, years){
+  var r = annualRatePct/100/12, n = years*12;
+  if (r === 0) return principal/n;
+  var f = Math.pow(1+r, n);
+  return principal*r*f/(f-1);
+}
+function rentVsBuy(o){
+  var down = o.price*o.downPct/100, loan = o.price-down;
+  var emi = emiMonthly(loan, o.rate, o.years);
+  var buyMonthly = emi + o.price*o.maintPct/100/12 + o.price*0.005/12; // maint + tax/ins approx
+  var rent = o.rent, invest = down, rentTotal = 0, buyTotal = down, breakEven = -1;
+  var rows = [];
+  for (var y=1; y<=o.years; y++){
+    rentTotal += rent*12;
+    buyTotal += buyMonthly*12;
+    // renter invests the monthly difference (buyMonthly - rent) plus keeps down payment invested
+    invest = invest*(1+o.investReturn/100) + Math.max(0,(buyMonthly-rent))*12*(1+o.investReturn/200);
+    var equity = Math.min(loan, emi*12*y*0.55); // rough principal paid share
+    var homeValue = o.price*Math.pow(1+o.appreciation/100, y);
+    var buyNet = buyTotal - (homeValue - (loan-equity));
+    var rentNet = rentTotal - (invest - down - Math.max(0,(buyMonthly-o.rent))*12*0 ); // keep simple: net = rent paid - investment growth
+    rentNet = rentTotal - (invest-down);
+    rows.push({year:y, rentNet:Math.round(rentNet), buyNet:Math.round(buyNet), rentPaid:Math.round(rentTotal), homeValue:Math.round(homeValue)});
+    if (breakEven<0 && buyNet < rentNet) breakEven = y;
+    rent = rent*(1+o.rentHike/100);
+  }
+  return {emi:Math.round(emi), down:Math.round(down), loan:Math.round(loan), buyMonthly:Math.round(buyMonthly), breakEven:breakEven, rows:rows};
+}
+if (typeof module!=="undefined") module.exports={emiMonthly:emiMonthly, rentVsBuy:rentVsBuy};
+
+</script>
+<script>
+
+function fmt(n){return n.toLocaleString('en-IN');}
+function calc(){
+  var o={price:+priceEl('price'),downPct:+priceEl('down'),rate:+priceEl('rate'),years:Math.max(1,+priceEl('years')),rent:+priceEl('rent'),rentHike:+priceEl('hike'),appreciation:+priceEl('appr'),investReturn:+priceEl('inv'),maintPct:+priceEl('maint')};
+  var r=rentVsBuy(o);
+  document.getElementById('oEmi').textContent='₹'+fmt(r.emi);
+  document.getElementById('oDown').textContent='₹'+fmt(r.down);
+  document.getElementById('oBe').textContent= r.breakEven>0 ? 'Year '+r.breakEven : 'Not in period';
+  var last=r.rows[r.rows.length-1];
+  document.getElementById('verdict').textContent = last.buyNet<last.rentNet ? '✅ Buying wins over '+o.years+' years by about ₹'+fmt(last.rentNet-last.buyNet)+' in net cost.' : '✅ Renting + investing wins over '+o.years+' years by about ₹'+fmt(last.buyNet-last.rentNet)+' in net cost.';
+  var max=Math.max.apply(null,r.rows.map(function(x){return Math.max(x.rentNet,x.buyNet,1);}));
+  document.getElementById('chart').innerHTML=r.rows.map(function(x){return '<div class="text-xs">Yr '+x.year+' <span class="inline-block h-3 rounded" style="background:#0F766E;width:'+Math.max(2,x.buyNet/max*55)+'%"></span> Buy ₹'+fmt(x.buyNet)+'<br><span class="inline-block h-3 rounded ml-8" style="background:#F59E0B;width:'+Math.max(2,x.rentNet/max*55)+'%"></span> Rent ₹'+fmt(x.rentNet)+'</div>';}).join('');
+  document.getElementById('tbl').innerHTML='<tr><th>Year</th><th>Total rent paid</th><th>Home value</th><th>Buy net cost</th><th>Rent net cost</th></tr>'+r.rows.map(function(x){return '<tr><td>'+x.year+'</td><td>₹'+fmt(x.rentPaid)+'</td><td>₹'+fmt(x.homeValue)+'</td><td>₹'+fmt(x.buyNet)+'</td><td>₹'+fmt(x.rentNet)+'</td></tr>';}).join('');
+}
+function priceEl(id){return document.getElementById(id).value;}
+calc();
+
+</script>
+</body>
+</html>
